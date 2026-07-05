@@ -384,3 +384,14 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 });
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll("[data-flash-toast]").forEach((toast) => {
+    setTimeout(() => {
+      toast.classList.add("is-hiding");
+
+      setTimeout(() => {
+        toast.remove();
+      }, 260);
+    }, 4200);
+  });
+});

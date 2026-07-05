@@ -11,6 +11,10 @@
         </div>
 
         <div class="page-head__actions">
+            <a class="btn btn-light" href="{{ route($routeName . '.excel-export') }}">
+                تصدير Excel
+            </a>
+
             @if ($routeName === 'employees')
                 <a class="btn btn-light" href="{{ route('employees.import.form') }}">
                     استيراد من Excel

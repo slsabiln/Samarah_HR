@@ -5,16 +5,16 @@ use App\Http\Controllers\AuditLogController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\LeaveBalanceAdjustmentController;
 use App\Http\Controllers\LeaveRequestController;
 use App\Http\Controllers\LoanController;
 use App\Http\Controllers\OfficialDocumentController;
+use App\Http\Controllers\OfficialHolidayController;
 use App\Http\Controllers\PayrollController;
 use App\Http\Controllers\PenaltyController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\TrainingController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\LeaveBalanceAdjustmentController;
-use App\Http\Controllers\OfficialHolidayController;
 
 Route::middleware('guest')->group(function (): void {
     Route::get('/login', [LoginController::class, 'show'])->name('login');
@@ -30,6 +30,33 @@ Route::middleware('auth')->group(function (): void {
         ->name('employees.import.form');
     Route::post('/employees/import', [EmployeeController::class, 'import'])
         ->name('employees.import.store');
+
+    Route::get('/employees/excel-export', [EmployeeController::class, 'exportExcel'])
+        ->name('employees.excel-export');
+
+    Route::get('/leaves/excel-export', [LeaveRequestController::class, 'exportExcel'])
+        ->name('leaves.excel-export');
+
+    Route::get('/official-holidays/excel-export', [OfficialHolidayController::class, 'exportExcel'])
+        ->name('official-holidays.excel-export');
+
+    Route::get('/leave-balance-adjustments/excel-export', [LeaveBalanceAdjustmentController::class, 'exportExcel'])
+        ->name('leave-balance-adjustments.excel-export');
+
+    Route::get('/loans/excel-export', [LoanController::class, 'exportExcel'])
+        ->name('loans.excel-export');
+
+    Route::get('/documents/excel-export', [OfficialDocumentController::class, 'exportExcel'])
+        ->name('documents.excel-export');
+
+    Route::get('/penalties/excel-export', [PenaltyController::class, 'exportExcel'])
+        ->name('penalties.excel-export');
+
+    Route::get('/attendances/excel-export', [AttendanceController::class, 'exportExcel'])
+        ->name('attendances.excel-export');
+
+    Route::get('/trainings/excel-export', [TrainingController::class, 'exportExcel'])
+        ->name('trainings.excel-export');
 
     Route::resource('employees', EmployeeController::class)->except('show');
     Route::resource('leaves', LeaveRequestController::class)->except('show');

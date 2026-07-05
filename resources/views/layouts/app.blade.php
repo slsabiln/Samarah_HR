@@ -180,6 +180,44 @@
                 @endif
             @endauth
 
+            @if (session('success') || session('error') || session('warning') || session('status') || $errors->any())
+                <div class="flash-toast-stack" data-flash-toast-stack>
+                    @if (session('success'))
+                        <div class="alert success flash-toast" data-flash-toast>
+                            {{ session('success') }}
+                        </div>
+                    @endif
+
+                    @if (session('error'))
+                        <div class="alert danger flash-toast" data-flash-toast>
+                            {{ session('error') }}
+                        </div>
+                    @endif
+
+                    @if (session('warning'))
+                        <div class="alert warning flash-toast" data-flash-toast>
+                            {{ session('warning') }}
+                        </div>
+                    @endif
+
+                    @if (session('status'))
+                        <div class="alert success flash-toast" data-flash-toast>
+                            {{ session('status') }}
+                        </div>
+                    @endif
+
+                    @if ($errors->any())
+                        <div class="alert danger flash-toast" data-flash-toast>
+                            <strong>يرجى مراجعة الأخطاء التالية:</strong>
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+                </div>
+            @endif
             @yield('content')
         </main>
     </div>
